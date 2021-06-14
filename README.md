@@ -7,5 +7,5 @@
 
 Repositório com os resultados das aulas Bootcamp Data Science Aplicada 2 da Alura
 
-Os notebooks de cada módulo estará separada por pastas
+Os notebooks de cada módulo estarão separada por pastas com o nome do módulo
 
