@@ -1,0 +1,43 @@
+ Procedimentos hospitalares do SUS - por local de internação - Brasil
+Óbitos por Unidade da Federação e Complexidade
+Período:2008-2020
+"Unidade da Federação";"Média complexidade";"Alta complexidade";"Total"
+"11 Rondônia";34496;1235;35731
+"12 Acre";17647;432;18079
+"13 Amazonas";55365;4856;60221
+"14 Roraima";10996;671;11667
+"15 Pará";127980;7941;135921
+"16 Amapá";12065;489;12554
+"17 Tocantins";31412;2231;33643
+"21 Maranhão";105421;4073;109494
+"22 Piauí";69409;4296;73705
+"23 Ceará";198983;19182;218165
+"24 Rio Grande do Norte";72700;3901;76601
+"25 Paraíba";99838;7017;106855
+"26 Pernambuco";257444;23178;280622
+"27 Alagoas";74812;3360;78172
+"28 Sergipe";47343;2439;49782
+"29 Bahia";332973;14188;347161
+"31 Minas Gerais";643455;42149;685604
+"32 Espírito Santo";98343;5815;104158
+"33 Rio de Janeiro";514427;21779;536206
+"35 São Paulo";1431751;96314;1528065
+"41 Paraná";349505;39723;389228
+"42 Santa Catarina";212168;17089;229257
+"43 Rio Grande do Sul";434010;33471;467481
+"50 Mato Grosso do Sul";71598;5809;77407
+"51 Mato Grosso";79517;2627;82144
+"52 Goiás";127314;9896;137210
+"53 Distrito Federal";73428;4918;78346
+"Total";5584400;379079;5963479
+ Fonte: Ministério da Saúde - Sistema de Informações Hospitalares do SUS (SIH/SUS)
+ Notas:
+ 
+ Dados referentes aos últimos seis meses, sujeitos a  atualização.
+ A partir do processamento de junho de 2012, houve mudança na classificação da natureza e esfera dos estabelecimentos. Com isso, temos que:
+      
+      Até maio de 2012 estas informações estão disponíveis como "Natureza" e "Esfera Administrativa".
+      De junho de 2012 a outubro de 2015, estão disponíveis tanto como "Natureza" e "Esfera Administrativa", como "Natureza Jurídica" e "Esfera Jurídica".
+      A partir de novembro de 2015, estão disponíveis como "Natureza Jurídica" e "Esfera Jurídica".
+      
+ 

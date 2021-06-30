@@ -1,0 +1,43 @@
+ Procedimentos hospitalares do SUS - por local de internação - Brasil
+Internações por Unidade da Federação e Complexidade
+Período:2008-2020
+"Unidade da Federação";"Média complexidade";"Alta complexidade";"Não se aplica";"Total"
+"11 Rondônia";1339768;26413;-;1366181
+"12 Acre";615107;10595;-;625702
+"13 Amazonas";2134046;67071;-;2201117
+"14 Roraima";449424;6826;-;456250
+"15 Pará";6267860;112831;-;6380691
+"16 Amapá";461249;7874;-;469123
+"17 Tocantins";1130080;45624;-;1175704
+"21 Maranhão";5169766;115327;-;5285093
+"22 Piauí";2725412;99934;-;2825346
+"23 Ceará";5894219;338980;-;6233199
+"24 Rio Grande do Norte";1979568;174853;1;2154422
+"25 Paraíba";2434116;124447;-;2558563
+"26 Pernambuco";6372578;513709;-;6886287
+"27 Alagoas";2106528;93428;-;2199956
+"28 Sergipe";1163208;37954;-;1201162
+"29 Bahia";10283593;441604;2;10725199
+"31 Minas Gerais";14281574;1005624;-;15287198
+"32 Espírito Santo";2636478;201728;-;2838206
+"33 Rio de Janeiro";8034360;504660;1;8539021
+"35 São Paulo";28131406;2458440;3;30589849
+"41 Paraná";9154274;1015978;1;10170253
+"42 Santa Catarina";5146996;473344;2;5620342
+"43 Rio Grande do Sul";8645827;897157;1;9542985
+"50 Mato Grosso do Sul";1976102;123994;-;2100096
+"51 Mato Grosso";2313625;68058;-;2381683
+"52 Goiás";4224175;238484;-;4462659
+"53 Distrito Federal";2364347;137583;1;2501931
+"Total";137435686;9342520;12;146778218
+ Fonte: Ministério da Saúde - Sistema de Informações Hospitalares do SUS (SIH/SUS)
+ Notas:
+ 
+ Dados referentes aos últimos seis meses, sujeitos a  atualização.
+ A partir do processamento de junho de 2012, houve mudança na classificação da natureza e esfera dos estabelecimentos. Com isso, temos que:
+      
+      Até maio de 2012 estas informações estão disponíveis como "Natureza" e "Esfera Administrativa".
+      De junho de 2012 a outubro de 2015, estão disponíveis tanto como "Natureza" e "Esfera Administrativa", como "Natureza Jurídica" e "Esfera Jurídica".
+      A partir de novembro de 2015, estão disponíveis como "Natureza Jurídica" e "Esfera Jurídica".
+      
+ 
