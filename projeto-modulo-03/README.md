@@ -1,22 +1,21 @@
 # Bootcamp-DataScience-projeto-modulo2
-Projeto do módulo 2 do bootcamp
+Projeto do módulo 3 do bootcamp
 
 
 <p align="center">
-  <img src="https://www.pfizer.com.br/sites/default/files/inline-images/faq-vacina-pfizer-biontech.jpg" width="968" height="625"/>
+  <img src="https://www.eccobandeiras.com.br/image/cache/catalog/Parana-800x533.jpg"/>
 </p>
 
 # Projeto de Data Science Aplicada 2 
 
-## Módulo 02
-Bem vindo a esse repositório relativo ao projeto do módulo 02 do Bootcamp de Data Science Aplicada, segunda turma, by Alura!
+## Módulo 03
+Bem vindo a esse repositório relativo ao projeto do módulo 03 do Bootcamp de Data Science Aplicada, segunda turma, by [Alura](http://www.alura.com.br)!
 
-Nesse segundo módulo continuamos a saga na obtenção dos dados reais para análise, aprendemos novas técnias de limpeza e tratamento dos dados, melhoramos as visulizações com a utilização da biblioteca Seaborn, conhecemos a função Melt() e trabalhamos melhor nas análise de gráficos e criação de hipóteses.
+Nesse terceiro módulo continuamos a aplicar técnicas de obtenção, limpeza e tratamento dos dados e fomos apresentados a análise de séries temporais. Foi utilizado a biblioteca de Machine Learning Facebook Prophet para análise de informações por período de tempo e melhorar as análise de gráficos e criação de hipóteses.
 
-Para conclusão do módulo o desafio é analisar os dados do programa de imunização nacional, utilizando mais dados, criando mais possibilidade de análises e buscando conseguir informações dos dados.
+Para conclusão do módulo o desafio é analisar os dados do COVID-19 no Brasil, utilizando dados mantidos no site [Brasil.IO](https://brasil.io/dataset/covid19/caso_full/), criando mais possibilidade de análises e buscando conseguir informações nesses dados.
 
 
 ## Objetivo
-Vamos analisar a evolução da cobertura vacinal no Brasil nos últimos anos, primeiramente será apresentado uma cobertura geral no país, e depois focaremos na evolução da cobertura contra a <i>**Poliomielite**</i>, como está a cobertura nacional, nas capitais e apresentar os 20 piores municípios.
-
+Vamos analisar a evolução da pandemia da COVID-19 no Estado do Paraná e utilizar  técnicas de Machine Learning para traçar uma previsão para a evolução da doença.
 
