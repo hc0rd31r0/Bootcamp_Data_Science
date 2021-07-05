@@ -1,7 +1,3 @@
-# Bootcamp-DataScience-projeto-modulo2
-Projeto do módulo 3 do bootcamp
-
-
 <p align="center">
   <img src=".\dados\COVID-19_PR.jpeg"/>
 </p>
