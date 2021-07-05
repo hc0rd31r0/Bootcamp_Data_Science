@@ -3,7 +3,7 @@ Projeto do módulo 3 do bootcamp
 
 
 <p align="center">
-  <img src="https://www.eccobandeiras.com.br/image/cache/catalog/Parana-800x533.jpg"/>
+  <img src=".\dados\COVID-19_PR.jpeg"/>
 </p>
 
 # Projeto de Data Science Aplicada 2 
