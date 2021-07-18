@@ -23,7 +23,7 @@ Bem vindo ao projeto final de conclusão do Bootcamp de Data Science Aplicada, s
 ## Objetivo
 Nesse projeto vamos trabalhar com informações do Hospital Sírio Libanês - São Paulo e Brasília - e o objetivo será **prever** quais pacientes precisarão ser admitidos na unidade de terapia intensiva e assim, **definir** qual a necessidade de leitos de UTI do hospital, a partir dos dados clínicos individuais disponíveis. Quando conseguimos definir a quantidade de leitos necessários em um determinado hospital, conseguimos evitar rupturas, visto que, caso outra pessoa procure ajuda e, eventualmente, precise de cuidados intensivos, o modelo preditivo já conseguirá detectar essa necessidade e, desta forma, a remoção e transferência deste(a) paciente pode ser organizada antecipadamente.
 
-Para atingir esse objetivo buscarei aplicar todo conhecimento adquirido durante o curso de Data Science e na experiência que venho adquirindo desde meu curso Técnico em Computação que fiz lá no 2º Grau, hoje ensino médio. São mais de 30 anos estudando e 25 anos trabalhando com Tecnologia da Informação.
+Para atingir esse objetivo buscarei aplicar todo conhecimento adquirido durante o curso de Data Science e na experiência que venho adquirindo desde meu curso Técnico em Computação que fiz lá no 2º Grau, hoje ensino médio. São mais de 30 anos estudando e 25 anos trabalhando com Tecnologia da Informação, mas apesar de toda essa bagagem, meu primeiro contato com a linguagem Python foi na Imersão Dados, que aconteceu de 03 a 07 de Maio de 2021, achei muito interessante e foi o que me motivou a enfrentar esse desafio do Bootcamp, culminando com esse projeto.
 
 
 <a name="dados"></a>
@@ -66,8 +66,18 @@ Considerando que os dados que utilizaremos para treinar nosso modelo contém a r
 <a name="referencia"></a>
 # Referências
 
+* [Hospital Sírio-Libanês](https://www.hospitalsiriolibanes.org.br/Paginas/nova-home.aspx)
 * [Kaggle](https://www.kaggle.com/S%C3%ADrio-Libanes/covid19)
 * [Pandas](https://pandas.pydata.org/pandas-docs/stable/index.html)
 * [SciKit Learn](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.linear_model)
 * [Os Três Tipos de Aprendizado de Máquina](https://lamfo-unb.github.io/2017/07/27/tres-tipos-am/)
-* [Enriched Lightgbm | PR 86% notebook](https://www.kaggle.com/andrewmvd/enriched-lightgbm-pr-86-auc-92-68) 
+* [Enriched Lightgbm | PR 86% notebook](https://www.kaggle.com/andrewmvd/enriched-lightgbm-pr-86-auc-92-68)   
+
+
+----
+
+<p align="center">
+  <img src=".\img\hospitalsiriolibanes-logo3.png"/>
+</p>
+
+----
