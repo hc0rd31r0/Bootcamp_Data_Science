@@ -1,5 +1,5 @@
 # Bootcamp Data Science Aplicada 2 - Módulo1
-Apresentação dos resultados das aulas Bootcamp  Data Science Aplicada 2 da Alura
+Apresentação dos resultados das aulas Bootcamp  Data Science Aplicada 2 da [Alura](https://www.alura.com.br) - Plataforma do [Bootcamp](https://bootcamps.alura.com.br/acesso-a-plataforma)
 
 ## Módulo 1: Python e pandas para análise de dados reais
 
