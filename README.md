@@ -41,7 +41,7 @@ Os projetos de cada módulo estão em pasta própria iniciando com **projeto...*
 
 - - - 
 <div align="center">
-    <img src="./img/escafandro.png">
+    <img src="./img/escafandro2.png">
  </div>
  - - - 
 

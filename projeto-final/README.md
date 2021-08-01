@@ -58,7 +58,7 @@ O problema proposto envolve duas tarefas (conforme descrito no site Kaggle):
 Serão aplicados modelos de Machine Learning para o problema de <u>Classificação Binária</u> (vai necessitar UTI, ou não) proposto pelo Hospital Sírio Libanês.
 Formalmente o Machine Learning é definido como:
 
->Aprendizado de máquina é definido por um sistema computacional que busca realizar uma tarefa $T$, aprendendo a partir de uma experiência $E$, procurando melhorar uma performance $P$.
+>Aprendizado de máquina é definido por um sistema computacional que busca realizar uma tarefa (T), aprendendo a partir de uma experiência (E), procurando melhorar uma performance (P).
 
 Considerando que os dados que utilizaremos para treinar nosso modelo contém a resposta desejada, usaremos técnicas para resolver problemas de **Aprendizado Supervisionado**, entre as mais conhecidas estão regressão linear, regressão logística, redes neurais artificiais, máquina se suporte vetorial (ou máquinas kernel), árvores de decisão, k-vizinhos mais próximos e Bayes ingênuo. Como ainda não sou especialista no assunto, utilizei:   [[[ Apresentar as técnicas utilizadas ]]]
 
