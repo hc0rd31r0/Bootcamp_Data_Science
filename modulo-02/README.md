@@ -1,5 +1,5 @@
-# Bootcamp Data Science Aplicada 2 - Módulo1
-Apresentação dos resultados das aulas Bootcamp  Data Science Aplicada 2 da Alura
+# Bootcamp Data Science Aplicada 2 - Módulo 2
+Apresentação dos resultados das aulas do módulo 2 do Bootcamp de Data Science Aplicada 2 da [Alura](https://www.alura.com.br) - Plataforma do [Bootcamp](https://bootcamps.alura.com.br/acesso-a-plataforma)
 
 ## Módulo 2: Visualização de dados com Seaborn e Matplotlib
 

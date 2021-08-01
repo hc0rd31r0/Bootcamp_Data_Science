@@ -6,6 +6,7 @@
 </p>
 
 ## Projeto Final de conclusão de Curso
+Apresentação do projeto final do Bootcamp de Data Science Aplicada 2 da [Alura](https://www.alura.com.br) - Plataforma do [Bootcamp](https://bootcamps.alura.com.br/acesso-a-plataforma)
 
 
 # Sumário
@@ -36,7 +37,7 @@ As informações para o desenvolvimento desse projeto foram disponibilizadas no 
 * Resultados do exame de sangue - 36 variáveis
 * Sinais vitais - 6 variáveis
 
-Serão aplicados as técnicas de obtenção, limpeza e tratamento dos dados buscando deixar as informações mais significativas para a análise.
+Serão aplicados as técnicas de obtenção, limpeza e tratamento dos dados buscando deixar as informações mais significativas para a análise, e esse tratamento pode ser visualizado no notebook [projeto_final_tratamento_dados.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/projeto_final_tratamento_dados.ipynb).
 
 
 <a name="analise"></a>
@@ -58,7 +59,7 @@ O problema proposto envolve duas tarefas (conforme descrito no site Kaggle):
 Serão aplicados modelos de Machine Learning para o problema de <u>Classificação Binária</u> (vai necessitar UTI, ou não) proposto pelo Hospital Sírio Libanês.
 Formalmente o Machine Learning é definido como:
 
->Aprendizado de máquina é definido por um sistema computacional que busca realizar uma tarefa (T), aprendendo a partir de uma experiência (E), procurando melhorar uma performance (P).
+>Aprendizado de máquina é definido por um sistema computacional que busca realizar uma tarefa $T$, aprendendo a partir de uma experiência $E$, procurando melhorar uma performance $P$.
 
 Considerando que os dados que utilizaremos para treinar nosso modelo contém a resposta desejada, usaremos técnicas para resolver problemas de **Aprendizado Supervisionado**, entre as mais conhecidas estão regressão linear, regressão logística, redes neurais artificiais, máquina se suporte vetorial (ou máquinas kernel), árvores de decisão, k-vizinhos mais próximos e Bayes ingênuo. Como ainda não sou especialista no assunto, utilizei:   [[[ Apresentar as técnicas utilizadas ]]]
 
@@ -71,7 +72,8 @@ Considerando que os dados que utilizaremos para treinar nosso modelo contém a r
 * [Pandas](https://pandas.pydata.org/pandas-docs/stable/index.html)
 * [SciKit Learn](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.linear_model)
 * [Os Três Tipos de Aprendizado de Máquina](https://lamfo-unb.github.io/2017/07/27/tres-tipos-am/)
-* [Enriched Lightgbm | PR 86% notebook](https://www.kaggle.com/andrewmvd/enriched-lightgbm-pr-86-auc-92-68)   
+* [Enriched Lightgbm | PR 86% - notebook](https://www.kaggle.com/andrewmvd/enriched-lightgbm-pr-86-auc-92-68)
+* [PedroHCAlmeida - notebook](https://github.com/PedroHCAlmeida/Bootcamp_alura/blob/main/Modulo_4/Aulas/Aulas.ipynb)
 
 
 ----
