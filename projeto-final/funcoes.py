@@ -111,6 +111,6 @@ def roda_modelo_cv(modelo, dados, n_splits, n_repeats):
     #auc_medio = np.mean(resultados['test_roc_auc'])
     #auc_medio_treino = np.mean(resultados['train_roc_auc'])
     #print(f"AUC {auc_medio} - {auc_medio_treino}")
-	# return auc_medio, auc_medio_treino, resultados
+    # return auc_medio, auc_medio_treino, resultados
     return resultados
 
