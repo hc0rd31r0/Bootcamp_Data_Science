@@ -63,7 +63,9 @@ Formalmente o Machine Learning é definido como:
 
 Considerando que os dados que utilizaremos para treinar nosso modelo contém a resposta desejada, usaremos técnicas para resolver problemas de **Aprendizado Supervisionado**, entre as mais conhecidas estão regressão linear, regressão logística, redes neurais artificiais, máquina se suporte vetorial (ou máquinas kernel), árvores de decisão, k-vizinhos mais próximos e Bayes ingênuo. Como ainda não sou especialista no assunto, utilizei um array com alguns modelos de Machine Learning e buscarei empregar os conceitos apresentados nas aulas, e é claro clonando e ajustando código python que for encontrando nas pesquisas necessárias para a conclusão desse projeto.
 
-P.S.: Crie este notebook [projeto_final_hiperparametros.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/projeto_final_hiperparametros.ipynb) para separar os teste de hiperparâmetros do projeto de análise principal [Bootcamp_DataScience_projeto_final.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/Bootcamp_DataScience_projeto_final.ipynb) pois estava levando muito tempo de processamento.
+**P.S.** 
+1. Crie este notebook [projeto_final_hiperparametros.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/projeto_final_hiperparametros.ipynb) para separar os teste de hiperparâmetros do projeto de análise principal [Bootcamp_DataScience_projeto_final.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/Bootcamp_DataScience_projeto_final.ipynb) pois estava levando muito tempo de processamento.
+2. E o arquivo [funcoes.py](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/funcoes.py) foi criado para a deixar a visualização dos notebooks mais clean e contém o código fonte das funções utilizadas pelos 3 notebooks.
 
 
 <a name="referencia"></a>
