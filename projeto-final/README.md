@@ -12,23 +12,21 @@ Apresentação do projeto final do Bootcamp de Data Science Aplicada 2 da [Alura
 # Sumário
 1. [Introdução](#intro)
 2. [Dados](#dados)
-3. [Análises](#analise)
-4. [Referências](#referencia)
+3. [Objetivo](#objetivo)
+4. [Metodologia](#metodologia)
+5. [Referências](#referencia)
 
 
 <a name="intro"></a>
-# Introdução
+# 1. Introdução
 
 Bem vindo ao projeto final de conclusão do Bootcamp de Data Science Aplicada, segunda turma, by [Alura](http://www.alura.com.br)!
 
-## Objetivo
-Nesse projeto vamos trabalhar com informações do Hospital Sírio Libanês - São Paulo e Brasília - e o objetivo será **prever** quais pacientes precisarão ser admitidos na unidade de terapia intensiva e assim, **definir** qual a necessidade de leitos de UTI do hospital, a partir dos dados clínicos individuais disponíveis. Quando conseguimos definir a quantidade de leitos necessários em um determinado hospital, conseguimos evitar rupturas, visto que, caso outra pessoa procure ajuda e, eventualmente, precise de cuidados intensivos, o modelo preditivo já conseguirá detectar essa necessidade e, desta forma, a remoção e transferência deste(a) paciente pode ser organizada antecipadamente.
-
-Para atingir esse objetivo buscarei aplicar todo conhecimento adquirido durante o curso de Data Science e na experiência que venho adquirindo desde meu curso Técnico em Computação que fiz lá no 2º Grau, hoje ensino médio. São mais de 30 anos estudando e 25 anos trabalhando com Tecnologia da Informação, mas apesar de toda essa bagagem, meu primeiro contato com a linguagem Python foi na Imersão Dados, que aconteceu de 03 a 07 de Maio de 2021, achei muito interessante e foi o que me motivou a enfrentar esse desafio do Bootcamp, culminando com esse projeto.
+Nesse projeto trabalharemos com informações do Hospital Sírio Libanês (HSL) – São Paulo/Brasília - com o objetivo de prever quais pacientes precisarão ser admitidos na unidade de terapia intensiva (UTI) e assim, definir qual a necessidade de leitos de UTI do hospital, a partir dos dados clínicos individuais disponíveis. Definindo a quantidade de leitos necessários em um determinado hospital, é possível evitar rupturas, visto que, caso outra pessoa procure ajuda e eventualmente precise de cuidados intensivos, o modelo preditivo já conseguirá detectar essa necessidade e, desta forma, a remoção e transferência deste paciente pode ser organizada antecipadamente.
 
 
 <a name="dados"></a>
-# Dados
+# 2. Dados
 
 As informações para o desenvolvimento desse projeto foram disponibilizadas no repositório do [Kaggle](https://www.kaggle.com/S%C3%ADrio-Libanes/covid19). Nela, encontramos diversos tipos de informações que foram separadas em 4 grupos:
 
@@ -40,10 +38,10 @@ As informações para o desenvolvimento desse projeto foram disponibilizadas no 
 Serão aplicados as técnicas de obtenção, limpeza e tratamento dos dados buscando deixar as informações mais significativas para a análise, e esse tratamento pode ser visualizado no notebook [projeto_final_tratamento_dados.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/projeto_final_tratamento_dados.ipynb).
 
 
-<a name="analise"></a>
-# Análises
+<a name="objetivo"></a>
+# 3. Objetivo
 
-A pandemia de COVID-19 causou uma sobrecarga nos sistemas de saúde, que afetou a disponibilidade de leitos de UTI nos hospitais. Portanto, é de extrema importância a obtenção de dados precisos para prever e preparar os sistemas de saúde e evitar colapsos, definidos pela necessidade de leitos de UTI acima da capacidade. Essas previsões podem ser realizadas utilizando os dados clínicos individuais.
+A pandemia de covid-19 sobrecarregou o Sistema de Saúde Brasileiro, afetando principalmente a disponibilidade de leitos de UTI. É evidente que a obtenção de dados precisos é necessária para evitar colapsos e a sobrecarga dos hospitais, já que muitos estiveram com leitos de UTIs lotados. Com base nesses dados, será possível prever o que acontecerá com os próximos pacientes.
 
 O problema proposto envolve duas tarefas (conforme descrito no site Kaggle):
 
@@ -56,20 +54,29 @@ O problema proposto envolve duas tarefas (conforme descrito no site Kaggle):
 **Prever NÃO admissão à UTI de casos COVID-19 confirmados**. Com base nos dados disponíveis, é possível prever quais pacientes precisarão de suporte de unidade de terapia intensiva? O objetivo é fornecer aos hospitais locais e temporários uma resposta boa o suficiente, para que os médicos de linha de frente possam dar alta com segurança e acompanhar remotamente esses pacientes. 
 
 
-Serão aplicados modelos de Machine Learning para o problema de <u>Classificação Binária</u> (vai necessitar UTI, ou não) proposto pelo Hospital Sírio Libanês.
-Formalmente o Machine Learning é definido como:
+<a name="metodologia"></a>
+# 4. Metodologia
 
->Aprendizado de máquina é definido por um sistema computacional que busca realizar uma tarefa $T$, aprendendo a partir de uma experiência $E$, procurando melhorar uma performance $P$.
+Serão aplicados modelos de Machine Learning para o problema de **Classificação Binária** (a UTI é necessária? Sim ou não) proposto pelo Hospital Sírio Libanês. Formalmente o Machine Learning é definido como:
 
-Considerando que os dados que utilizaremos para treinar nosso modelo contém a resposta desejada, usaremos técnicas para resolver problemas de **Aprendizado Supervisionado**, entre as mais conhecidas estão regressão linear, regressão logística, redes neurais artificiais, máquina se suporte vetorial (ou máquinas kernel), árvores de decisão, k-vizinhos mais próximos e Bayes ingênuo. Como ainda não sou especialista no assunto, utilizei um array com alguns modelos de Machine Learning e buscarei empregar os conceitos apresentados nas aulas, e é claro clonando e ajustando código python que for encontrando nas pesquisas necessárias para a conclusão desse projeto.
+>Aprendizado de máquina é definido por um sistema computacional que busca realizar uma tarefa ***T***, aprendendo a partir de uma experiência ***E***, procurando melhorar uma performance ***P***.
 
-**P.S.** 
-1. Crie este notebook [projeto_final_hiperparametros.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/projeto_final_hiperparametros.ipynb) para separar os teste de hiperparâmetros do projeto de análise principal [Bootcamp_DataScience_projeto_final.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/Bootcamp_DataScience_projeto_final.ipynb) pois estava levando muito tempo de processamento.
-2. E o arquivo [funcoes.py](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/funcoes.py) foi criado para a deixar a visualização dos notebooks mais clean e contém o código fonte das funções utilizadas pelos 3 notebooks.
+Como os dados utilizados para treinar nosso modelo contém a resposta desejada, será aplicado o  **Aprendizado Supervisionado**. Os modelos mais conhecidas são Regressão Linear, Regressão Logística, Redes Neurais Artificiais, Máquina de Suporte Vetorial (ou máquinas kernel), Árvores de Decisão, K-Vizinhos mais próximos e Bayes ingênuo.
 
+Para tal, um array com alguns modelos de Machine Learning foi utilizado e foi aplicado os conceitos apresentados nas aulas, clonando e ajustando o código python que foi encontrado nas pesquisas necessárias para a conclusão desse projeto.
+
+## Estrutura
+O projeto está organizado da seguinte forma:
+
+* A análise principal está no arquivo [Bootcamp_DataScience_projeto_final.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/Bootcamp_DataScience_projeto_final.ipynb)
+* O arquivo [projeto_final_hiperparametros.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/projeto_final_hiperparametros.ipynb) contem os teste de hiperparâmetros dos modelos e foi separado da análise principal pois requer tempo de processamento
+* O arquivo [projeto_final_tratamento_dados.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/projeto_final_tratamento_dados.ipynb) faz o tratamento dos dados originais fornecido pelo HSL
+* o arquivo [funcoes.py](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/funcoes.py) tem o código fonte das funções utilizadas pelos 3 notebooks deixando-os mais claros.
+* pasta ```dados``` contém as planilhas utilizadas
+* pasta ```img``` contém as imagens
 
 <a name="referencia"></a>
-# Referências
+# 5. Referências
 
 * [Hospital Sírio-Libanês](https://www.hospitalsiriolibanes.org.br/Paginas/nova-home.aspx)
 * [Kaggle - COVID-19 - Clinical Data to assess diagnosis - Sírio Libanês](https://www.kaggle.com/S%C3%ADrio-Libanes/covid19)
