@@ -61,7 +61,9 @@ Formalmente o Machine Learning é definido como:
 
 >Aprendizado de máquina é definido por um sistema computacional que busca realizar uma tarefa $T$, aprendendo a partir de uma experiência $E$, procurando melhorar uma performance $P$.
 
-Considerando que os dados que utilizaremos para treinar nosso modelo contém a resposta desejada, usaremos técnicas para resolver problemas de **Aprendizado Supervisionado**, entre as mais conhecidas estão regressão linear, regressão logística, redes neurais artificiais, máquina se suporte vetorial (ou máquinas kernel), árvores de decisão, k-vizinhos mais próximos e Bayes ingênuo. Como ainda não sou especialista no assunto, utilizei:   [[[ Apresentar as técnicas utilizadas ]]]
+Considerando que os dados que utilizaremos para treinar nosso modelo contém a resposta desejada, usaremos técnicas para resolver problemas de **Aprendizado Supervisionado**, entre as mais conhecidas estão regressão linear, regressão logística, redes neurais artificiais, máquina se suporte vetorial (ou máquinas kernel), árvores de decisão, k-vizinhos mais próximos e Bayes ingênuo. Como ainda não sou especialista no assunto, utilizei um array com alguns modelos de Machine Learning e buscarei empregar os conceitos apresentados nas aulas, e é claro clonando e ajustando código python que for encontrando nas pesquisas necessárias para a conclusão desse projeto.
+
+P.S.: Crie este notebook [projeto_final_hiperparametros.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/projeto_final_hiperparametros.ipynb) para separar os teste de hiperparâmetros do projeto de análise principal [Bootcamp_DataScience_projeto_final.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/Bootcamp_DataScience_projeto_final.ipynb) pois estava levando muito tempo de processamento.
 
 
 <a name="referencia"></a>
