@@ -392,6 +392,7 @@ def plotar_media_curva_roc(names, models, dados, nrows, ncols, n_splits=5, n_rep
   x_columns = dados.columns
   y = dados['ICU']
   x = dados[x_columns].drop(["ICU"], axis=1)
+  retorno = []
 
   for name, clf in zip(names, models):
     # plt.figure(figsize=(7,7))
@@ -414,7 +415,7 @@ def plotar_media_curva_roc(names, models, dados, nrows, ncols, n_splits=5, n_rep
     mean_tpr = np.mean(tprs, axis=0)
     mean_auc = metrics.auc(mean_fpr, mean_tpr)
     plt.plot(mean_fpr, mean_tpr, color='blue',
-      label=r'Mean ROC (AUC = %0.2f )' % (mean_auc), lw=2, alpha=1)
+      label=r'Mean ROC (AUC = %0.4f )' % (mean_auc), lw=2, alpha=1)
 
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
@@ -422,4 +423,8 @@ def plotar_media_curva_roc(names, models, dados, nrows, ncols, n_splits=5, n_rep
     plt.legend(bbox_to_anchor=(1.05,1), frameon=True,  fontsize='large', shadow=True)
     #plt.text(0.32,0.7,'More accurate area',fontsize = 12)
     #plt.text(0.63,0.4,'Less accurate area',fontsize = 12)
-    plt.show()   
+    plt.show()
+    valores = [name, mean_auc]
+    retorno.append(valores)
+
+  return retorno
