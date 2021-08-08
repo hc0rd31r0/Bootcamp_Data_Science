@@ -15,7 +15,7 @@ Um bootcamp é um treinamento intensivo que tem o objetivo de fazer com que seus
 
 Algumas instituições de ensino ainda utilizam os métodos tradicionais e muito demorados para formar um profissional que esteja apto a atuar no mercado.
 
-No entanto, o bootcamp é uma nova metodologia de educação que vem se mostrando cada vez mais eficiente na formação e inserção de novos profissionais qualificados em programação no mercado de trabalho.
+No entanto, o bootcamp é uma nova metodologia de educação que vem se mostrando cada vez mais eficiente na formação e inserção de novos profissionais qualificados no mercado de trabalho.
 
 Para saber mais [veja esse site](https://www.lewagon.com/pt-BR/blog/o-que-e-bootcamp)
 
