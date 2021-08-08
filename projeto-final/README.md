@@ -68,12 +68,18 @@ Considerando que os dados que utilizaremos para treinar nosso modelo contém a r
 # Referências
 
 * [Hospital Sírio-Libanês](https://www.hospitalsiriolibanes.org.br/Paginas/nova-home.aspx)
-* [Kaggle](https://www.kaggle.com/S%C3%ADrio-Libanes/covid19)
+* [Kaggle - COVID-19 - Clinical Data to assess diagnosis - Sírio Libanês](https://www.kaggle.com/S%C3%ADrio-Libanes/covid19)
 * [Pandas](https://pandas.pydata.org/pandas-docs/stable/index.html)
 * [SciKit Learn](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.linear_model)
 * [Os Três Tipos de Aprendizado de Máquina](https://lamfo-unb.github.io/2017/07/27/tres-tipos-am/)
 * [Enriched Lightgbm | PR 86% - notebook](https://www.kaggle.com/andrewmvd/enriched-lightgbm-pr-86-auc-92-68)
 * [PedroHCAlmeida - notebook](https://github.com/PedroHCAlmeida/Bootcamp_alura/blob/main/Modulo_4/Aulas/Aulas.ipynb)
+* [willianrocha (notebook)](https://github.com/willianrocha/COVID-19_clinical_data_assess_diagnosis/blob/main/notebooks/ML.ipynb)
+* [Configurar o treinamento do AutoML com Python](https://docs.microsoft.com/pt-br/azure/machine-learning/how-to-configure-auto-train)
+* [Avaliando os resultados do experimento de machine learning automatizado](https://docs.microsoft.com/pt-br/azure/machine-learning/how-to-understand-automated-ml)
+* [Matriz de Confusão e AUC ROC](https://medium.com/data-hackers/matriz-de-confus%C3%A3o-e-auc-roc-f7e446dca107)
+* [SciKit Learn - 3.3. Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter)
+* [SciKit Learn - Choosing the right estimator](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 
 
 ----
