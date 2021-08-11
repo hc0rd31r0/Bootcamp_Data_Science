@@ -13,7 +13,7 @@ from scipy.stats import randint
 import sklearn.metrics as metrics
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import classification_report
-from sklearn.metrics import fbeta_score
+from sklearn.metrics import f1_score
 from sklearn.metrics import plot_confusion_matrix
 
 from sklearn.model_selection import train_test_split
@@ -23,16 +23,25 @@ from sklearn.model_selection import RandomizedSearchCV
 
 
 def preenche_tabela(dados):
+  """
+  
+  Função para preenher os valores nulos do dataframe desconsiderando as informações 
+  das janelas de atendimento que o paciente foi internado (ICU = 1)
+
+  Parâmetros
+  ----------
+    dados: dataFrame.
+
+  Retorno
+  -------
+    dfretorno: dataFrame com o resultado do processamento.
+
+  """
+
   def preenche_na(rows):
     rows.loc[rows["ICU"] != 1] = rows.loc[rows["ICU"] != 1].fillna(method='bfill').fillna(method='ffill')
     return rows
 
-  """
-  Função para preenher os valores nulos do dataframe (dados)
-  desconsiderando as informações das janelas que o paciente foi internado ICU != 1
-
-  Retorna um dataFrame
-  """
 
   #Identificando as colunas contínuas
   features_continuas_colunas = dados.iloc[:, 13:-2].columns
@@ -43,19 +52,27 @@ def preenche_tabela(dados):
   features_categoricas = dados.iloc[:, :13]
   saida = dados.iloc[:, -2:]
 
-  dados_finais = pd.concat([features_categoricas, features_continuas, saida], ignore_index=True, axis=1)
-  dados_finais.columns = dados.columns
+  dfretorno = pd.concat([features_categoricas, features_continuas, saida], ignore_index=True, axis=1)
+  dfretorno.columns = dados.columns
 
-  return dados_finais
+  return dfretorno
 
 
 
-def remove_corr_var(dados, valor_corte):
+def remove_corr_var(dados, valor_corte= 0.95):
   """
-  Função para remover as colunas do dataframe (dados) com valores de auto correlação
-  superiores ao valor_corte informado
+  
+  Função para remover as colunas do dataframe com valor de correlação.
+  
+  Parâmetros
+  ----------
+    dados: dataFrame.
+    valor_corte: Valor de corte da correlação, default=0.95
 
-  Retorna um dataFrame 
+  Retorno
+  -------
+    dfretorno: dataFrame com o resultado do processamento.
+
   """
 
   matriz_corr = dados.iloc[:,3:-1].corr().abs()
@@ -68,19 +85,26 @@ def remove_corr_var(dados, valor_corte):
 
 def roda_modelo(model, dados):
   """
-  Função para processar um model sobre os dados, utilizando train_test_split
-  e mostrando o valor da AUC.
 
-  A execução dessa função sofre interferência da aleatoriedade da função train_test_split
-  para a separação dos dados.
+  Função para processar um model sobre os dados, utilizando train_test_split e retornardo o valor da AUC.
 
-  Retorna: auc
+  A execução dessa função sofre interferência da aleatoriedade da função train_test_split para a separação dos dados.
+
+  Parâmetros
+  ----------
+    modelo: modelo a ser executado.
+    dados: fonte de dados
+
+  Retorno
+  -------
+    auc: resultado da função roc_auc_score()
+
   """
   x_columns = dados.columns
   y = dados['ICU']
   x = dados[x_columns].drop(["ICU","WINDOW"], axis=1)
 
-  x_train, x_test, y_train, y_test = train_test_split(x, y, stratify=y)
+  x_train, x_test, y_train, y_test = train_test_split(x, y, stratify=y, test_size=0.3)
 
   model.fit(x_train, y_train)
   predicao = model.predict(x_test)
@@ -97,11 +121,26 @@ def roda_modelo(model, dados):
 
 def roda_n_modelos(model, dados, n):
   """
+  
+  Essa função diminui os efeitos da aleatoriedade do train_test_split, veja roda_modelo(),
+  fazendo uma média da execução de n vezes do model sobre os dados.
+
+  Parâmetros
+  ----------
+    modelo: modelo a ser executado.
+    dados: fonte de dados
+    n: número de execuções para obter a média.
+
+  Retorno
+  -------
+    auc: resultado da função roc_auc_score()
+    
   Essa função diminui os efeitos da aleatoriedade do train_test_split, veja roda_modelo(), 
   fazendo uma média da execução de n vezes do model sobre os dados.
 
   Retorna: auc_medio, auc_std
   """
+  
 
   x_columns = dados.columns
   y = dados['ICU']
@@ -110,7 +149,7 @@ def roda_n_modelos(model, dados, n):
   auc_lista = []
 
   for _ in range(n):
-      x_train, x_test, y_train, y_test = train_test_split(x, y, stratify=y)
+      x_train, x_test, y_train, y_test = train_test_split(x, y, stratify=y, test_size=0.3)
 
       model.fit(x_train, y_train)
       prob_predic = model.predict_proba(x_test)
@@ -128,18 +167,22 @@ def roda_n_modelos(model, dados, n):
 
 def roda_modelo_cv(model, dados, n_splits, n_repeats):
   """
-  Função para executar (model) fazendo um split dos (dados) com RepeatedStratifiedKFold
-  com (n_splits) e executando (n_repeats)
+  
+  Função que processa um modelo com os dados utilizando RepeatedStratifiedKFold()
 
-  Returna um array com os resultados das seguintes métricas
-     * accuracy
-     * roc_auc
-     * average_precision
-     
-     Tannto dos dados teste e de treino
+  Parâmetros
+  ----------
+    model: modelo a ser executado.
+    dados: fonte de dados
+    n_splits: quantidade de splits de dados usado pela função RepeatedStratifiedKFold()
+    n_repeats: quantidade de repeats usado pela função RepeatedStratifiedKFold()
+
+  Retorno
+  -------
+    resultados: resultado do cross_validate()
+
   """
 
-  # Utilizamos Como o RepeatedStratifiedKFold não 
   np.random.seed(73246)
   dados = dados.sample(frac=1).reset_index(drop=True)
 
@@ -157,11 +200,25 @@ def roda_modelo_cv(model, dados, n_splits, n_repeats):
 
 def executa_modelos(names, models, dados, n_splits, n_repeats):
   """
-  Executa uma lista de modelos (models), utilizando a função roda_modelo_cv(),
-  passando n_splits e n_repeats para a roda_modelo_cv, e retorna um dataFrame
-  com o resultado da média da Acurácia, Roc AUC, PR AUC, e ROC AUC do Treino
 
-  Retorna: dataFrame ordenado por ROC AUC
+  Processa uma lista de modelos utilizando a função roda_modelo_cv(),
+  e retorna um dataFrame como resultado.
+
+  Parâmetros
+  ----------
+    names: array com os nomes dos modelos, e também é usado como o index do dataFrame de retorno.
+             ex.: names = [ "KNeighbors", "Gaussian" ]
+    models: array com as instâncias dos modelos a serem processados.
+             ex.: classes = [ KNeighborsClassifier(), 
+                              GaussianProcessClassifier() ]
+    dados: dataFrame com as variáveis a serem analisadas
+    n_splits: quantidade de splits de dados usado pela função RepeatedStratifiedKFold()
+    n_repeats: quantidade de repeats usado pela função RepeatedStratifiedKFold()
+
+  Retorno
+  -------
+    dfretorno: dataFrame com os resultados ordenado por ROC AUC 
+
   """
 
   dfretorno = pd.DataFrame()
@@ -189,33 +246,37 @@ def executa_modelos(names, models, dados, n_splits, n_repeats):
 
 def roda_modelo_RandomizedSearchCV(model, dados, n_splits, n_repeats, param_distributions, n_iter):
   """
-  Função para aplicar os hiperparametros (param_distributions) ao model, utilizando os dados,
-  sendo separados em n_splits, sendo repetidos n_repeats, e o parâmetro n_iter é aplicado na iteração
-  dos parâmetros.
+  
+  Função para aplicar os hiperparametros (param_distributions) ao modelo.
+  
+  Parâmetros
+  ----------
+    model: Modelo de Machine Learning.
+    dados: dataFrame com os dados
+    n_splits: quantidade de splits de dados usado pela função RepeatedStratifiedKFold
+    n_repeats: quantidade de repeats usado pela função RepeatedStratifiedKFold
+    param_distributions: parâmetros a serem testados
+    n_iter: Número de configurações de parâmetro que serão testados.
 
-  Returna: o resultado do RandomizedSearchCV, com as seguintes métricas:
-     * accuracy
-     * roc_auc
-     * precision
-     * recall
-     * f1
-     * average_precision
+  Retorno
+  -------
+    busca: objeto RandomizedSearchCV
   """
 
   np.random.seed(73246)
   dados = dados.sample(frac=1).reset_index(drop=True)
+
   x_columns = dados.columns
   y = dados["ICU"]
   x = dados[x_columns].drop(["ICU"], axis=1)
 
   cv = RepeatedStratifiedKFold(n_splits=n_splits, n_repeats=n_repeats)
 
-  busca = RandomizedSearchCV(model, param_distributions=param_distributions,
+  busca = RandomizedSearchCV(estimator=model, param_distributions=param_distributions,
                              n_iter=n_iter, cv=cv,
 #                             scoring=['accuracy','roc_auc', 'precision', 'recall', 'f1', 'average_precision'], refit='roc_auc',
-#                             return_train_score=True )
-                             scoring='roc_auc', return_train_score=True )
-
+                             scoring='roc_auc', 
+                             return_train_score=True, n_jobs=-1, random_state=73246)
   busca.fit(x, y)
 
   return busca
@@ -224,14 +285,49 @@ def roda_modelo_RandomizedSearchCV(model, dados, n_splits, n_repeats, param_dist
 
 def executa_modelos_RandomizedSearchCV(names, models, dados, n_splits, n_repeats, param_distributions, n_iter, showMsg=True):
   """
-  Executa teste dos hiperparametros dos modelos passados em param_distributions das informações nos 
-  array names e models sobre os dados, utilizando a função roda_modelo_RandomizedSearchCV()
+  
+  Função que recebe parâmetros para a execução de teste de hiperparametros dos modelos.
+  Utiliza a função roda_modelo_RandomizedSearchCV()
+  
+  Parâmetros
+  ----------
+    names: array com os nomes dos modelos. É usado como o index do dataFrame de retorno.
+             ex.: names = [ "KNeighbors", "Gaussian" ]
+    models: array com a instância do modelo a ser testado.
+             ex.: classes = [ KNeighborsClassifier(), 
+                              GaussianProcessClassifier() ]
+    dados: dataFrame com os dados
+    n_splits: parâmetro utilizado pelo roda_modelo_RandomizedSearchCV()
+    n_repeats: parâmetro utilizado pelo roda_modelo_RandomizedSearchCV()
+    param_distributions: dicionário com parâmetros a serem testados
+            ex: hiperparams = { 
+                    "KNeighbors" : {
+                        "n_neighbors" : randint(2, 20),
+                        "weights" : ["uniform", "distance"],
+                        "leaf_size" : randint(25, 100),
+                        "metric" : ["minkowski","wminkowski", "euclidean"] 
+                    },
+                    "Gaussian" : {
+                        "n_restarts_optimizer" : randint(0, 5),
+                        "max_iter_predict" : randint(50,500),
+                        "warm_start" : [False, True] 
+                    }
+                }
+    n_iter: parâmetro utilizado pelo roda_modelo_RandomizedSearchCV()
+    showMsg: Imprime o tempo de processamento.
+             Essa informação está no dataFrame de retorno.
+
+  Retorno
+  -------
+    df_retorno_rand: dataFrame com o resultado do processamento com os seguintes campos:
+        [Nome, Modelo, AUC, Train AUC, Std AUC, Best Params, Tempo]
+
   """
   df_retorno_rand = pd.DataFrame()
 
   for name, model in zip(names, models):
     start_time = time.time()
-    busca = roda_modelo_RandomizedSearchCV( model, dados, n_splits, n_repeats, param_distributions[name], n_iter)
+    busca = roda_modelo_RandomizedSearchCV(model, dados, n_splits, n_repeats, param_distributions[name], n_iter)
     resultados = pd.DataFrame(busca.cv_results_)
     total_time = time.time() - start_time
 
@@ -242,12 +338,12 @@ def executa_modelos_RandomizedSearchCV(names, models, dados, n_splits, n_repeats
 #                              resultados.iloc[busca.best_index_]['mean_test_roc_auc'], 
 #                              resultados.iloc[busca.best_index_]['mean_test_average_precision'],
 #                              resultados.iloc[busca.best_index_]['mean_train_roc_auc'], busca.best_params_, int(total_time)]],
-#                            columns=['Nome', 'Modelo', 'Accuracy', 'ROC AUC', 'PR AUC', 'Train ROC AUC', 'Best Params', 'Tempo'])    
+#                            columns=['Nome', 'Modelo', 'Accuracy', 'ROC AUC', 'PR AUC', 'Train ROC AUC', 'Best Params', 'Tempo'])
 
     df_result2 = pd.DataFrame([[name, busca.best_estimator_, resultados.iloc[busca.best_index_]['mean_test_score'], 
                               resultados.iloc[busca.best_index_]['mean_train_score'], 
-                              resultados.iloc[busca.best_index_]['std_test_score'], busca.best_params_, int(total_time)]],
-                            columns=['Nome', 'Modelo', 'AUC', 'Train AUC', 'Std AUC', 'Best Params', 'Tempo'])
+                              resultados.iloc[busca.best_index_]['std_test_score'], busca.best_params_, int(total_time), busca]],
+                            columns=['Nome', 'Modelo', 'AUC', 'Train AUC', 'Std AUC', 'Best Params', 'Tempo', 'objRandomizedSearchCV'])
 
     df_retorno_rand = df_retorno_rand.append(df_result2)
 
@@ -315,7 +411,7 @@ def plotar_matrix_confusao_modelos(names, models, dados, nrows, ncols):
   Retorna um array dos modelos treinados
   """
   np.random.seed(73246)
-  fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(13, 15))
+  fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(10,10))
   axis = []
   for ax in axes:
     axis.extend(ax)
@@ -338,9 +434,9 @@ def plotar_matrix_confusao_modelos(names, models, dados, nrows, ncols):
     y_predict = clf.predict(X_test)
     y_predict_proba = clf.predict_proba(X_test)
     auc = roc_auc_score(y_test, y_predict_proba[:,1])
-    f1_score = fbeta_score(y_test, y_predict, average='macro', beta=1)
-    axis[axes_ind].set_title(f'{name}, F1 = {f1_score:.2f}', fontsize=13)
-
+    f1score = f1_score(y_test, y_predict)
+    #axis[axes_ind].set_title(f'{name}, F1 = {f1score:.2f}', fontsize=13)
+    axis[axes_ind].set_title(f'{name}', fontsize=13)
     disp.im_.set_clim(0, 50)
     axes_ind += 1
 
@@ -386,7 +482,7 @@ def montar_classificacao(names, models, dados):
 
 
 
-def plotar_media_curva_roc(names, models, dados, nrows, ncols, n_splits=5, n_repeats=10):
+def plotar_media_curva_roc(names, models, dados, nrows, ncols, n_splits=5, n_repeats=10, plotar=True):
 
   np.random.seed(73246)
   x_columns = dados.columns
@@ -395,36 +491,79 @@ def plotar_media_curva_roc(names, models, dados, nrows, ncols, n_splits=5, n_rep
   retorno = []
 
   for name, clf in zip(names, models):
-    # plt.figure(figsize=(7,7))
-    cv = RepeatedStratifiedKFold(n_splits=n_splits, n_repeats=n_repeats)
+
+    i = 1
     tprs = []
     aucs = []
     mean_fpr = np.linspace(0,1,100)
-    i = 1
+    cv = RepeatedStratifiedKFold(n_splits=n_splits, n_repeats=n_repeats)
+
     for train,test in cv.split(x,y):
       prediction = clf.fit(x.iloc[train],y.iloc[train]).predict_proba(x.iloc[test])
       fpr, tpr, t = metrics.roc_curve(y[test], prediction[:, 1])
       tprs.append(np.interp(mean_fpr, fpr, tpr))
       roc_auc = metrics.auc(fpr, tpr)
       aucs.append(roc_auc)
-      # plt.plot(fpr, tpr, lw=2, alpha=0.3, label='ROC fold %d (AUC = %0.2f)' % (i, roc_auc))
-      plt.plot(fpr, tpr, lw=1, alpha=0.3, label='') 
+      if plotar:
+        # plt.plot(fpr, tpr, lw=2, alpha=0.3, label='ROC fold %d (AUC = %0.2f)' % (i, roc_auc))
+        plt.plot(fpr, tpr, lw=1, alpha=0.3, label='') 
       i= i+1
 
-    plt.plot([0,1],[0,1],linestyle = '--', lw=2, color='red')
     mean_tpr = np.mean(tprs, axis=0)
     mean_auc = metrics.auc(mean_fpr, mean_tpr)
-    plt.plot(mean_fpr, mean_tpr, color='blue',
-      label=r'Mean ROC (AUC = %0.4f )' % (mean_auc), lw=2, alpha=1)
 
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title(f'ROC {name}')
-    plt.legend(bbox_to_anchor=(1.05,1), frameon=True,  fontsize='large', shadow=True)
-    #plt.text(0.32,0.7,'More accurate area',fontsize = 12)
-    #plt.text(0.63,0.4,'Less accurate area',fontsize = 12)
-    plt.show()
+    if plotar:
+      plt.plot([0,1],[0,1],linestyle = '--', lw=2, color='red')
+      plt.plot(mean_fpr, mean_tpr, color='blue', label=r'Media ROC (AUC = %0.4f )' % (mean_auc), lw=2, alpha=1)
+      plt.xlabel('False Positive Rate')
+      plt.ylabel('True Positive Rate')
+      plt.title(f'ROC {name}')
+      plt.legend(bbox_to_anchor=(1.05,1), frameon=True,  fontsize='large', shadow=True)
+      #plt.text(0.32,0.7,'More accurate area',fontsize = 12)
+      #plt.text(0.63,0.4,'Less accurate area',fontsize = 12)
+      plt.show()
+    
     valores = [name, mean_auc]
     retorno.append(valores)
 
   return retorno
+
+
+
+def montar_dataframe_medias_AUC( media_auc_padrao, media_auc_hiper):
+  def max_value(row):
+    return max(row['Media_Ajustado'], row['Media_padrao'])
+
+  dfmean1 = pd.DataFrame(data=media_auc_padrao, columns=['Nome','Media_padrao'])
+  dfmean2 = pd.DataFrame(data=media_auc_hiper, columns=['Nome','Media_Ajustado'])
+  dfretorno = dfmean1.merge(dfmean2,on="Nome")
+  dfretorno['diferenca (%)'] = (dfretorno['Media_Ajustado'] - dfretorno['Media_padrao']) * 100
+  dfretorno['AUC'] = dfretorno.apply(max_value, axis=1)
+  dfretorno = dfretorno.sort_values(by='AUC', ascending=False)
+
+  return dfretorno
+
+
+
+def montar_dataframe_avaliacao( names_matriz, df_from_montar_classificacao, df_from_medias_AUC):
+  dfretorno = pd.DataFrame()
+  for name in names_matriz:
+    precision_0 = pd.DataFrame(df_from_montar_classificacao[name])['precision']['0']
+    precision_1 = pd.DataFrame(df_from_montar_classificacao[name])['precision']['1']
+    recall_0    = pd.DataFrame(df_from_montar_classificacao[name])['recall']['0']
+    recall_1    = pd.DataFrame(df_from_montar_classificacao[name])['recall']['1']
+    f1score_0   = pd.DataFrame(df_from_montar_classificacao[name])['f1-score']['0']
+    f1score_1   = pd.DataFrame(df_from_montar_classificacao[name])['f1-score']['1']
+    accuracy    = pd.DataFrame(df_from_montar_classificacao[name])['f1-score']['accuracy']
+    df_x = pd.DataFrame([[name, precision_0, precision_1, recall_0, recall_1, 
+                        f1score_0, f1score_1, accuracy]], 
+                      columns=['Nome','Precision 0','Precision 1','Recall 0','Recall 1',
+                               'F1-Score 0', 'F1-Score 1', 'Accuracy'])
+    dfretorno = dfretorno.append(df_x)
+
+  dfretorno.reset_index(drop=True, inplace=True)
+  dfretorno = dfretorno.set_index('Nome')
+  
+  dfretorno = dfretorno.merge(df_from_medias_AUC[['Nome','AUC']], on="Nome")
+
+  return dfretorno
