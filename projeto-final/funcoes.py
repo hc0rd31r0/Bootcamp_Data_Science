@@ -141,7 +141,7 @@ def roda_n_modelos(model, dados, n):
   Retorna: auc_medio, auc_std
   """
   
-
+  np.random.seed(73246)
   x_columns = dados.columns
   y = dados['ICU']
   x = dados[x_columns].drop(["ICU"], axis=1)
@@ -191,7 +191,6 @@ def roda_modelo_cv(model, dados, n_splits, n_repeats):
   x = dados[x_columns].drop(["ICU"], axis=1)
 
   cv = RepeatedStratifiedKFold(n_splits = n_splits, n_repeats = n_repeats)
-#  resultados = cross_validate(model, x, y, cv=cv, scoring=['accuracy','roc_auc', 'precision', 'recall', 'f1', 'average_precision'], return_train_score=True)
   resultados = cross_validate(model, x, y, cv=cv, scoring=['accuracy','roc_auc', 'average_precision'], return_train_score=True)
 
   return resultados
@@ -217,7 +216,7 @@ def executa_modelos(names, models, dados, n_splits, n_repeats):
 
   Retorno
   -------
-    dfretorno: dataFrame com os resultados ordenado por ROC AUC 
+    dfretorno: dataFrame com os resultados
 
   """
 
@@ -238,7 +237,7 @@ def executa_modelos(names, models, dados, n_splits, n_repeats):
 
   dfretorno.reset_index(drop=True, inplace=True)
   dfretorno = dfretorno.set_index('Nome')
-  dfretorno = dfretorno.sort_values(by='ROC AUC', ascending=False)
+  # dfretorno = dfretorno.sort_values(by='ROC AUC', ascending=False)
 
   return dfretorno
 
@@ -365,6 +364,7 @@ def plotar_curva_roc_modelos(names, models, dados):
   y = dados['ICU']
   x = dados[x_columns].drop(["ICU"], axis=1)
 
+  np.random.seed(73246)
   X_train, X_test, y_train, y_test = train_test_split(x, y, stratify=y, test_size=0.3)
 
   plt.subplots(figsize=(8, 8))
@@ -383,7 +383,6 @@ def plotar_curva_roc_modelos(names, models, dados):
     # plt.plot(fpr, tpr, 'b', label = label)
     i = i + 1
 
-
   plt.legend(bbox_to_anchor=(1.05,1), frameon=True,  fontsize='large', facecolor='Snow', shadow=True)
   plt.plot([0, 1], [0, 1],'r--')
   plt.xlim([0, 1])
@@ -399,6 +398,7 @@ def plotar_matrix_confusao(model, dados):
   y = dados['ICU']
   x = dados[x_columns].drop(["ICU"], axis=1)
 
+  np.random.seed(73246)
   X_train, X_test, y_train, y_test = train_test_split(x, y, stratify=y, test_size=0.3)
   model.fit(X_train, y_train)
 
@@ -413,7 +413,7 @@ def plotar_matrix_confusao_modelos(names, models, dados, nrows, ncols):
 
   Retorna um array dos modelos treinados
   """
-  np.random.seed(73246)
+
   fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(10,10))
   axis = []
   for ax in axes:
@@ -424,10 +424,12 @@ def plotar_matrix_confusao_modelos(names, models, dados, nrows, ncols):
   y = dados['ICU']
   x = dados[x_columns].drop(["ICU"], axis=1)
 
+  np.random.seed(73246)
   X_train, X_test, y_train, y_test = train_test_split(x, y, stratify=y, test_size=0.3)
 
   trained_models = []
   for name, clf in zip(names, models):
+
     clf.fit(X_train, y_train)
     trained_models.append(clf)
     disp = plot_confusion_matrix(clf, X_test, y_test, ax=axis[axes_ind])
@@ -472,6 +474,7 @@ def montar_classificacao(names, models, dados):
   y = dados['ICU']
   x = dados[x_columns].drop(["ICU"], axis=1)
 
+  np.random.seed(73246)
   X_train, X_test, y_train, y_test = train_test_split(x, y, stratify=y, test_size=0.3)
 
   dfs = []
@@ -506,15 +509,13 @@ def plotar_media_curva_roc(names, models, dados, n_splits=5, n_repeats=10, plota
   
   """
 
-  np.random.seed(73246)
-
   x_columns = dados.columns
   y = dados['ICU']
   x = dados[x_columns].drop(["ICU"], axis=1)
   retorno = []
 
   for name, clf in zip(names, models):
-
+    np.random.seed(73246)
     i = 1
     tprs = []
     aucs = []
@@ -554,8 +555,9 @@ def plotar_media_curva_roc(names, models, dados, n_splits=5, n_repeats=10, plota
 
 
 
-def montar_dataframe_medias_AUC( media_auc_padrao, media_auc_hiper):
+def montar_dataframe_medias_AUC(media_auc_padrao, media_auc_hiper):
   """
+
   Função para montar um dataFrame com os retornos da função plotar_media_curva_roc()
   
   Parâmetros
@@ -568,7 +570,7 @@ def montar_dataframe_medias_AUC( media_auc_padrao, media_auc_hiper):
   Retorno
   -------
     dfretorno: dataFrame com o merge dos parâmetros de entrada e com a coluna de diferença
-  
+
   """
   
   
