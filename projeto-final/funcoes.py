@@ -261,6 +261,7 @@ def roda_modelo_RandomizedSearchCV(model, dados, n_splits, n_repeats, param_dist
   Retorno
   -------
     busca: objeto RandomizedSearchCV
+  
   """
 
   np.random.seed(73246)
@@ -320,7 +321,7 @@ def executa_modelos_RandomizedSearchCV(names, models, dados, n_splits, n_repeats
   Retorno
   -------
     df_retorno_rand: dataFrame com o resultado do processamento com os seguintes campos:
-        [Nome, Modelo, AUC, Train AUC, Std AUC, Best Params, Tempo]
+        [Nome, Modelo, AUC, Train AUC, Std AUC, Best Params, Tempo, objRandomizedSearchCV]
 
   """
   df_retorno_rand = pd.DataFrame()
@@ -349,7 +350,7 @@ def executa_modelos_RandomizedSearchCV(names, models, dados, n_splits, n_repeats
 
   df_retorno_rand.reset_index(drop=True, inplace=True)
   df_retorno_rand = df_retorno_rand.set_index('Nome')
-  df_retorno_rand = df_retorno_rand.sort_values(by="AUC", ascending=False)
+  # df_retorno_rand = df_retorno_rand.sort_values(by="AUC", ascending=False)
 
   return df_retorno_rand
 
@@ -358,6 +359,7 @@ def executa_modelos_RandomizedSearchCV(names, models, dados, n_splits, n_repeats
 def plotar_curva_roc_modelos(names, models, dados):
   """
    Função para plotar a curva ROC AUC da array de names e models, sobre os dados
+   sujeito a aleatoriedade do train_test_split
   """
   x_columns = dados.columns
   y = dados['ICU']
@@ -407,6 +409,7 @@ def plotar_matrix_confusao(model, dados):
 def plotar_matrix_confusao_modelos(names, models, dados, nrows, ncols):
   """
   Plotar a Matriz de Confusão do array de names e models, sobre os dados, em nrows e ncols
+
 
   Retorna um array dos modelos treinados
   """
@@ -482,9 +485,29 @@ def montar_classificacao(names, models, dados):
 
 
 
-def plotar_media_curva_roc(names, models, dados, nrows, ncols, n_splits=5, n_repeats=10, plotar=True):
+def plotar_media_curva_roc(names, models, dados, n_splits=5, n_repeats=10, plotar=True):
+  """
+  
+  Função que plota a curva ROC AUC, considerando a média dos (n_splits * n_repeats) 
+  de processamento com RepeatedStratifiedKFold()
+  
+  Parâmetros
+  ----------
+    names: array com o nome dos modelos
+    models: arrya com a instancia do Modelo de Machine Learning.
+    dados: dataFrame com os dados
+    n_splits: quantidade de splits de dados usado pela função RepeatedStratifiedKFold
+    n_repeats: quantidade de repeats usado pela função RepeatedStratifiedKFold
+    plotar: plota o gráfico. Pode ser utilizado para obter a AUC média apenas.
+
+  Retorno
+  -------
+    retorno: array com o nome do modelo na 1ª coluna e a AUC média na 2ª coluna
+  
+  """
 
   np.random.seed(73246)
+
   x_columns = dados.columns
   y = dados['ICU']
   x = dados[x_columns].drop(["ICU"], axis=1)
@@ -495,7 +518,8 @@ def plotar_media_curva_roc(names, models, dados, nrows, ncols, n_splits=5, n_rep
     i = 1
     tprs = []
     aucs = []
-    mean_fpr = np.linspace(0,1,100)
+    mean_fpr = np.linspace(0,1,(n_splits * n_repeats))
+    
     cv = RepeatedStratifiedKFold(n_splits=n_splits, n_repeats=n_repeats)
 
     for train,test in cv.split(x,y):
@@ -531,11 +555,28 @@ def plotar_media_curva_roc(names, models, dados, nrows, ncols, n_splits=5, n_rep
 
 
 def montar_dataframe_medias_AUC( media_auc_padrao, media_auc_hiper):
+  """
+  Função para montar um dataFrame com os retornos da função plotar_media_curva_roc()
+  
+  Parâmetros
+  ----------
+    media_auc_padrao: array com o resultado da função plotar_media_curva_roc() sobre
+    os modelos default
+    media_auc_hiper: array com o resultado da função plotar_media_curva_roc() sobre
+    os modelos ajustados 
+
+  Retorno
+  -------
+    dfretorno: dataFrame com o merge dos parâmetros de entrada e com a coluna de diferença
+  
+  """
+  
+  
   def max_value(row):
     return max(row['Media_Ajustado'], row['Media_padrao'])
 
-  dfmean1 = pd.DataFrame(data=media_auc_padrao, columns=['Nome','Media_padrao'])
-  dfmean2 = pd.DataFrame(data=media_auc_hiper, columns=['Nome','Media_Ajustado'])
+  dfmean1 = pd.DataFrame(data=media_auc_padrao, columns=['Nome','Media_padrao']).set_index("Nome")
+  dfmean2 = pd.DataFrame(data=media_auc_hiper, columns=['Nome','Media_Ajustado']).set_index("Nome")
   dfretorno = dfmean1.merge(dfmean2,on="Nome")
   dfretorno['diferenca (%)'] = (dfretorno['Media_Ajustado'] - dfretorno['Media_padrao']) * 100
   dfretorno['AUC'] = dfretorno.apply(max_value, axis=1)
@@ -561,9 +602,9 @@ def montar_dataframe_avaliacao( names_matriz, df_from_montar_classificacao, df_f
                                'F1-Score 0', 'F1-Score 1', 'Accuracy'])
     dfretorno = dfretorno.append(df_x)
 
+  dfretorno = dfretorno.merge(df_from_medias_AUC[['Nome','AUC']], on="Nome")
   dfretorno.reset_index(drop=True, inplace=True)
   dfretorno = dfretorno.set_index('Nome')
   
-  dfretorno = dfretorno.merge(df_from_medias_AUC[['Nome','AUC']], on="Nome")
 
   return dfretorno
