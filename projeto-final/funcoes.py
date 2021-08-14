@@ -580,8 +580,8 @@ def montar_dataframe_medias_AUC(media_auc_padrao, media_auc_hiper):
   dfmean2 = pd.DataFrame(data=media_auc_hiper, columns=['Nome','Media_Ajustado']).set_index("Nome")
   dfretorno = dfmean1.merge(dfmean2,on="Nome")
   dfretorno['diferenca (%)'] = (dfretorno['Media_Ajustado'] - dfretorno['Media_padrao']) * 100
-  dfretorno['AUC'] = dfretorno.apply(max_value, axis=1)
-  dfretorno = dfretorno.sort_values(by='AUC', ascending=False)
+  # dfretorno['AUC'] = dfretorno.apply(max_value, axis=1)
+  # dfretorno = dfretorno.sort_values(by='AUC', ascending=False)
 
   return dfretorno
 
@@ -603,9 +603,9 @@ def montar_dataframe_avaliacao( names_matriz, df_from_montar_classificacao, df_f
                                'F1-Score 0', 'F1-Score 1', 'Accuracy'])
     dfretorno = dfretorno.append(df_x)
 
-  dfretorno = dfretorno.merge(df_from_medias_AUC[['Nome','AUC']], on="Nome")
   dfretorno.reset_index(drop=True, inplace=True)
   dfretorno = dfretorno.set_index('Nome')
+  dfretorno = dfretorno.merge(df_from_medias_AUC[['Media_Ajustado']], on="Nome")
   
 
   return dfretorno
