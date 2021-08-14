@@ -309,8 +309,7 @@ def executa_modelos_RandomizedSearchCV(names, models, dados, n_splits, n_repeats
                     },
                     "Gaussian" : {
                         "n_restarts_optimizer" : randint(0, 5),
-                        "max_iter_predict" : randint(50,500),
-                        "warm_start" : [False, True] 
+                        "max_iter_predict" : randint(50,500)
                     }
                 }
     n_iter: parâmetro utilizado pelo roda_modelo_RandomizedSearchCV()
@@ -497,7 +496,7 @@ def plotar_media_curva_roc(names, models, dados, n_splits=5, n_repeats=10, plota
   Parâmetros
   ----------
     names: array com o nome dos modelos
-    models: arrya com a instancia do Modelo de Machine Learning.
+    models: array com a instancia do Modelo de Machine Learning.
     dados: dataFrame com os dados
     n_splits: quantidade de splits de dados usado pela função RepeatedStratifiedKFold
     n_repeats: quantidade de repeats usado pela função RepeatedStratifiedKFold
@@ -610,3 +609,44 @@ def montar_dataframe_avaliacao( names_matriz, df_from_montar_classificacao, df_f
   
 
   return dfretorno
+
+
+def listar_parametros(names, models):
+  """
+  
+  Função que montar uma tabela com os parâmetros resultantes do processamento de
+  otimização dos modelos, destacando o rank_test_score = 1.
+  
+  Parâmetros
+  ----------
+    names: array com o nome dos modelos
+    models: array com a instancia do Modelo de Machine Learning.
+
+  Retorno
+  -------
+    Nenhum retorno
+  
+  """
+
+  def highlight_equal(s, value, column):
+    is_max = pd.Series(data=False, index=s.index)
+    is_max[column] = s.loc[column] == value
+    return ['background-color: yellow; font-weight: bold;' if is_max.any() else None for v in is_max]
+
+  for indice in names:
+    obj = models.at[indice,'objRandomizedSearchCV']
+    dfParams = pd.DataFrame(obj.cv_results_['params']).reset_index()
+    metricas = { 'rank_test_score': obj.cv_results_['rank_test_score'],
+                 'media_AUC_teste': obj.cv_results_['mean_test_score'],
+                 'media_AUC_treino':obj.cv_results_['mean_train_score'] }
+    dfMetricas = pd.DataFrame(metricas).reset_index()
+    dfAvaliacao = pd.merge(dfMetricas,dfParams, on="index")
+    dfAvaliacao.drop(['index'],axis=1,inplace=True)
+    print(200*'_')
+    print(indice)
+    print(len(indice)*'¨')
+    display(dfAvaliacao.style.apply(highlight_equal, value=1, column=['rank_test_score'], axis=1))
+
+  print(200*'_')
+
+
