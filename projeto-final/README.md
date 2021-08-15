@@ -69,11 +69,11 @@ Para tal, um array com alguns modelos de Machine Learning foi utilizado e foi ap
 O projeto está organizado da seguinte forma:
 
 * A análise principal está no arquivo [Bootcamp_DataScience_projeto_final.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/Bootcamp_DataScience_projeto_final.ipynb)
-* O arquivo [projeto_final_hiperparametros.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/projeto_final_hiperparametros.ipynb) contem os teste de hiperparâmetros dos modelos e foi separado da análise principal pois requer tempo de processamento
+* O arquivo [projeto_final_hiperparametros.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/projeto_final_hiperparametros.ipynb) contém os teste de hiperparâmetros dos modelos e foi separado da análise principal pois requer tempo de processamento
 * O arquivo [projeto_final_tratamento_dados.ipynb](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/projeto_final_tratamento_dados.ipynb) faz o tratamento dos dados originais fornecido pelo HSL
 * o arquivo [funcoes.py](https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/projeto-final/funcoes.py) tem o código fonte das funções utilizadas pelos 3 notebooks deixando-os mais claros.
-* pasta ```dados``` contém as planilhas utilizadas
-* pasta ```img``` contém as imagens
+* pasta ```dados``` contém as planilhas utilizadas, uma cópia do dataFrame resultante do processamento de otimização (arquivos: dfmodelosHP) e o nosso modelo salvo (modelo_hsl)
+* pasta ```img``` contém as imagens utilizadas no projeto
 
 <a name="referencia"></a>
 # 5. Referências
