@@ -161,7 +161,7 @@ def roda_n_modelos(model, dados, n):
   print(f"AUC médio {auc_medio}")
   print(f"Intervalo {auc_medio - 2* auc_std} - {auc_medio + 2* auc_std}")
 
-  return auc_medio, auc_std  
+  return auc_medio, auc_std
 
 
 
@@ -393,6 +393,21 @@ def plotar_curva_roc_modelos(names, models, dados):
 
 
 def plotar_matrix_confusao(model, dados):
+  """
+  
+  Plotar a Matriz de Confusão de um modelo
+
+  Parâmetros
+  ----------
+    model: modelo a ser plotado.
+    dados: dataFrame com os dados
+
+  Retorno
+  -------
+    Sem retorno.
+
+  """
+
   x_columns = dados.columns
   y = dados['ICU']
   x = dados[x_columns].drop(["ICU"], axis=1)
@@ -407,10 +422,23 @@ def plotar_matrix_confusao(model, dados):
 
 def plotar_matrix_confusao_modelos(names, models, dados, nrows, ncols):
   """
-  Plotar a Matriz de Confusão do array de names e models, sobre os dados, em nrows e ncols
+  
+  Plotar a Matriz de Confusão de vários modelos.
 
+  Parâmetros
+  ----------
+    names: array com os nomes dos modelos.  ex.: names = [ "KNeighbors", "Gaussian" ]
+    models: array com a instância do modelo a ser plotado.
+             ex.: classes = [ KNeighborsClassifier(), 
+                              GaussianProcessClassifier() ]
+    dados: dataFrame com os dados
+    nrows: quantidade de linhas no gráfico
+    ncols: quantidade de colunas no gráfico
 
-  Retorna um array dos modelos treinados
+  Retorno
+  -------
+    Sem retorno.
+
   """
 
   fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(10,10))
@@ -426,11 +454,9 @@ def plotar_matrix_confusao_modelos(names, models, dados, nrows, ncols):
   np.random.seed(73246)
   X_train, X_test, y_train, y_test = train_test_split(x, y, stratify=y, test_size=0.3)
 
-  trained_models = []
   for name, clf in zip(names, models):
 
     clf.fit(X_train, y_train)
-    trained_models.append(clf)
     disp = plot_confusion_matrix(clf, X_test, y_test, ax=axis[axes_ind])
     axis[axes_ind].set_xlabel('Previsto', fontsize=12)
     axis[axes_ind].set_ylabel('Reais', fontsize=12)
@@ -451,12 +477,26 @@ def plotar_matrix_confusao_modelos(names, models, dados, nrows, ncols):
     ax.set_visible(False)
     fig.delaxes(ax)
 
-  return trained_models
-
 
 
 
 def montar_classificacao(names, models, dados):
+  """
+
+  Montar um dataFrame com o resultado do classification_report.
+  
+  Parâmetros
+  ----------
+    names: array com o nome dos modelos
+    models: array com a instancia do Modelo de Machine Learning.
+    dados: dataFrame com os dados
+
+  Retorno
+  -------
+    dfretorno: dataFrame populado
+  
+  """
+
   def format_classification_report(test, predict):
     df_cr = pd.DataFrame(classification_report(test, predict, output_dict=True)).T
     df_cr['precision']['accuracy'] = ''
@@ -464,10 +504,6 @@ def montar_classificacao(names, models, dados):
     df_cr['support']['accuracy'] = df_cr['support']['macro avg']
     df_cr['support'] = df_cr['support'].astype('int32')
     return df_cr
-
-    """
-    Montar um dataFrame com o classification_report do array de names e models, sobre os dados
-    """
 
   x_columns = dados.columns
   y = dados['ICU']
@@ -482,8 +518,9 @@ def montar_classificacao(names, models, dados):
     y_predict = model.predict(X_test)
     dfs.append(format_classification_report(y_test, y_predict))
 
-  dffinal = pd.concat(dfs, axis=1, keys=names)
-  return dffinal
+  dfretorno = pd.concat(dfs, axis=1, keys=names)
+
+  return dfretorno
 
 
 
@@ -572,7 +609,6 @@ def montar_dataframe_medias_AUC(media_auc_padrao, media_auc_hiper):
 
   """
   
-  
   def max_value(row):
     return max(row['Media_Ajustado'], row['Media_padrao'])
 
@@ -588,6 +624,22 @@ def montar_dataframe_medias_AUC(media_auc_padrao, media_auc_hiper):
 
 
 def montar_dataframe_avaliacao( names_matriz, df_from_montar_classificacao, df_from_medias_AUC):
+  """
+  
+  Função para montar um dataFrame com as informações dos parâmetros.
+  
+  Parâmetros
+  ----------
+    names_matriz: array com os nomes dos modelos
+    df_from_montar_classificacao: resultado da função montar_classificacao()
+    df_from_medias_AUC: resultado da função montar_dataframe_medias_AUC()
+
+  Retorno
+  -------
+    dfretorno: dataFrame com o merge dos parâmetros de entrada
+
+  """
+
   dfretorno = pd.DataFrame()
   for name in names_matriz:
     precision_0 = pd.DataFrame(df_from_montar_classificacao[name])['precision']['0']
@@ -606,7 +658,8 @@ def montar_dataframe_avaliacao( names_matriz, df_from_montar_classificacao, df_f
   dfretorno.reset_index(drop=True, inplace=True)
   dfretorno = dfretorno.set_index('Nome')
   dfretorno = dfretorno.merge(df_from_medias_AUC[['Media_Ajustado']], on="Nome")
-  
+  dfretorno.columns = ['Precision 0','Precision 1','Recall 0','Recall 1',
+                       'F1-Score 0', 'F1-Score 1', 'Accuracy', 'AUC']
 
   return dfretorno
 
