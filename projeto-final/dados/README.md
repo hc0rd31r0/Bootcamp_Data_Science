@@ -1,10 +1,6 @@
 
 # Projeto de Data Science Aplicada 2 
 
-<p align="center">
-  <img src="..\.\img\hospitalsiriolibanes-imagem1.jpg"/>
-</p>
-
 ## Projeto Final de conclusão de Curso
 Apresentação do projeto final do Bootcamp de Data Science Aplicada 2 da [Alura](https://www.alura.com.br) - Plataforma do [Bootcamp](https://bootcamps.alura.com.br/acesso-a-plataforma)
 
