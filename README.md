@@ -2,7 +2,7 @@
     <img src="./img/img_bootcamp_2.png">
  </div>
 
-# Bootcamp Data Science Aplicada 2
+# Bootcamp Data Science Aplicada
 
 Bem vindo!
 
@@ -24,25 +24,44 @@ Para saber mais [veja esse site](https://www.lewagon.com/pt-BR/blog/o-que-e-boot
 ## Organização
 
 Cada módulo foi divido em pastas que contém seus arquivos das aulas e fontes de dados e respostas dos desafios propostos.
-Os projetos de cada módulo estão em pasta própria iniciando com **projeto...**.
+Os projetos de cada módulo estão em pasta própria iniciando com **projeto-...**.
 
 
 - - - 
 
 ## Módulos
 
-### Módulo 1: Python e pandas para análise de dados reais
-### Módulo 2: Visualização de dados com Seaborn e Matplotlib
-### Módulo 3: Análise de séries temporais
-### Módulo 4: Tratamento, análise e Machine Learning aplicado
-### Módulo 5: Modelos, métricas e validações em Machine Learning
-### Módulo 6: Extra
+### Módulo 01: Python e pandas para análise de dados reais
+* Projeto: Explorando dados financeiros do SUS.
 
+### Módulo 02: Visualização de dados com Seaborn e Matplotlib
+* Projeto: Visualização e análise de dados aplicada a saúde.
+
+### Módulo 03: Análise de séries temporais
+* Projeto: Análise de séries temporais aplicado à Saúde.
+  
+### Módulo 04: Tratamento, análise e Machine Learning aplicado
+* Projeto: Data Science aplicado aos dados da COVID-19
+
+### Módulo 05: Modelos, métricas e validações em Machine Learning
+* Projeto: Data Science aplicado aos dados da COVID-19
+  
+### Módulo 06: (Extra) Data Science Aplicado em Finanças
+
+- - - 
+
+## Instrutores
+
+* Allan Spadini
+* Guilherme SIlveira
+* Igor Nascimento
+* Karoline Penteado
+* Paulo Vasconcellos
+* Thiago Gonçalves
 
 - - - 
 <div align="center">
     <img src="./img/escafandro2.png">
  </div>
- - - - 
-
-P.S.: ainda em construção
+ 
+ - - -
