@@ -3,7 +3,7 @@ from joblib import load
 import pandas as pd
 from utils import Transformador
 
-st.image('img/bytebank_logo.png')
+st.image('./img/bytebank_logo.png')
 st.write('# Simulador de Crédito')
 
 #Cor de fundo do listbox
@@ -12,8 +12,8 @@ st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', uns
 
 
 def avaliar_mau(dict_respostas):
-	modelo = load('objetos/modelo.joblib')
-	features = load('objetos/features.joblib')
+	modelo = load('./objetos/modelo.joblib')
+	features = load('./objetos/features.joblib')
 
 	if dict_respostas['Anos_desempregado'] > 0:
 		dict_respostas['Anos_empregado'] = dict_respostas['Anos_desempregado'] * -1 
