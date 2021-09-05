@@ -3,7 +3,7 @@ from joblib import load
 import pandas as pd
 from utils import Transformador
 
-st.image('./img/bytebank_logo.png')
+st.image('https://raw.githubusercontent.com/hc0rd31r0/Bootcamp_Data_Science/main/avaliacao_credito/img/bytebank_logo.png')
 st.write('# Simulador de Crédito')
 
 #Cor de fundo do listbox
