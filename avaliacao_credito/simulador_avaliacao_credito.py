@@ -3,7 +3,9 @@ from joblib import load
 import pandas as pd
 from utils import Transformador
 
-st.image('https://raw.githubusercontent.com/hc0rd31r0/Bootcamp_Data_Science/main/avaliacao_credito/img/bytebank_logo.png')
+pathfile = "https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/avaliacao_credito/"
+
+st.image( pathfile + 'img/bytebank_logo.png?raw=true')
 st.write('# Simulador de Crédito')
 
 #Cor de fundo do listbox
@@ -12,8 +14,8 @@ st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', uns
 
 
 def avaliar_mau(dict_respostas):
-	modelo = load('https://raw.githubusercontent.com/hc0rd31r0/Bootcamp_Data_Science/main/avaliacao_credito/objetos/modelo.joblib')
-	features = load('https://raw.githubusercontent.com/hc0rd31r0/Bootcamp_Data_Science/main/avaliacao_credito/objetos/features.joblib')
+	modelo = load( pathfile + 'objetos/modelo.joblib?raw=true')
+	features = load( pathfile + 'objetos/features.joblib?raw=true')
 
 	if dict_respostas['Anos_desempregado'] > 0:
 		dict_respostas['Anos_empregado'] = dict_respostas['Anos_desempregado'] * -1 
@@ -36,7 +38,7 @@ my_expander_2 = st.beta_expander("Pessoal")
 my_expander_3 = st.beta_expander("Familia")
 
 dict_respostas = {}
-lista_campos = load('https://raw.githubusercontent.com/hc0rd31r0/Bootcamp_Data_Science/main/avaliacao_credito/objetos/lista_campos.joblib')
+lista_campos = load( pathfile + 'objetos/lista_campos.joblib?raw=true')
 
 with my_expander_1:
 
