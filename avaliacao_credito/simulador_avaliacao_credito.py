@@ -12,8 +12,8 @@ st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', uns
 
 
 def avaliar_mau(dict_respostas):
-	modelo = load('./objetos/modelo.joblib')
-	features = load('./objetos/features.joblib')
+	modelo = load('https://raw.githubusercontent.com/hc0rd31r0/Bootcamp_Data_Science/main/avaliacao_credito/objetos/modelo.joblib')
+	features = load('https://raw.githubusercontent.com/hc0rd31r0/Bootcamp_Data_Science/main/avaliacao_credito/objetos/features.joblib')
 
 	if dict_respostas['Anos_desempregado'] > 0:
 		dict_respostas['Anos_empregado'] = dict_respostas['Anos_desempregado'] * -1 
@@ -36,7 +36,7 @@ my_expander_2 = st.beta_expander("Pessoal")
 my_expander_3 = st.beta_expander("Familia")
 
 dict_respostas = {}
-lista_campos = load('objetos/lista_campos.joblib')
+lista_campos = load('https://raw.githubusercontent.com/hc0rd31r0/Bootcamp_Data_Science/main/avaliacao_credito/objetos/lista_campos.joblib')
 
 with my_expander_1:
 
