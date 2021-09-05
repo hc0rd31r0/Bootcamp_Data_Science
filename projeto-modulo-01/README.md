@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/hc0rd31r0/Bootcamp-DataScience-projeto-modulo1/blob/3d6439ae3dda4dd7b90ce1fa374e8508862827fe/Dados/IA.jpg?raw=true"/>
+  <img src="https://github.com/hc0rd31r0/Bootcamp_Data_Science/blob/main/img/IA.jpg?raw=true"/>
 </p>
 
 # Projeto de Data Science Aplicada 2 
